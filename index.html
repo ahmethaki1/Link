@@ -15,8 +15,8 @@
 }
 
 body{
-    font-family:Arial, sans-serif;
-    background:linear-gradient(135deg,#ffd6e7,#fff0f5);
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg,#ffd6e7,#fff0f5);
     height:100vh;
     overflow:hidden;
     display:flex;
@@ -27,63 +27,72 @@ body{
 
 .container{
     padding:20px;
+    z-index:2;
 }
 
 h1{
-    color:#ff4081;
+    color:#ff3b7d;
     font-size:3rem;
     margin-bottom:30px;
+    text-shadow:1px 1px 5px rgba(0,0,0,0.1);
 }
 
 button{
     border:none;
-    border-radius:20px;
-    padding:15px 35px;
+    border-radius:25px;
+    padding:18px 40px;
     margin:10px;
     font-size:24px;
     cursor:pointer;
     transition:0.3s;
+    font-weight:bold;
 }
 
 #yes{
-    background:#28c76f;
+    background:#2ecc71;
     color:white;
+    box-shadow:0 5px 15px rgba(46,204,113,.4);
 }
 
 #no{
     background:#ff4d4d;
     color:white;
+    box-shadow:0 5px 15px rgba(255,77,77,.4);
 }
 
 #result{
     display:none;
     padding:20px;
+    z-index:2;
 }
 
 #result img{
-    width:350px;
+    width:380px;
     max-width:90%;
     border-radius:25px;
-    box-shadow:0 0 25px rgba(0,0,0,0.2);
+    border:6px solid white;
+    box-shadow:0 10px 25px rgba(0,0,0,.2);
 }
 
 .message{
-    margin-top:20px;
-    font-size:38px;
-    color:#ff4081;
+    margin-top:25px;
+    font-size:42px;
+    color:#ff3b7d;
     font-weight:bold;
 }
 
 .sub{
     margin-top:15px;
-    font-size:26px;
+    font-size:28px;
+    color:#333;
 }
 
 .heart{
     position:fixed;
     top:-50px;
-    font-size:24px;
+    font-size:28px;
     animation:fall linear infinite;
+    z-index:1;
 }
 
 @keyframes fall{
@@ -100,10 +109,14 @@ button{
 
 <body>
 
+<audio id="music" loop>
+    <source src="muzik.mp3" type="audio/mpeg">
+</audio>
+
 <div class="container" id="main">
 
     <h1 id="question">
-        Beni affeder misin Çibicik? ❤️
+        Beni affeder misin Çibicik? 🥺❤️
     </h1>
 
     <button id="yes">❤️ Evet</button>
@@ -113,7 +126,7 @@ button{
 
 <div id="result">
 
-    <img src="bizimfoto.jpeg" alt="Biz">
+    <img src="bizimfoto.jpeg" alt="Bizim Fotoğrafımız">
 
     <div class="message">
         Seni çok seviyorum ❤️
@@ -138,8 +151,9 @@ const messages = [
     "Gerçekten mi? 🥺",
     "Bir daha düşün ❤️",
     "Lütfen 😭",
-    "Bak çok üzüldüm 😔",
-    "Son kararın mı? 💔"
+    "Çok üzüldüm 😔",
+    "Sensiz olmuyor 💔",
+    "Son kararın mı? 😭"
 ];
 
 let count = 0;
@@ -162,7 +176,7 @@ noBtn.addEventListener("click", () => {
         yesBtn.style.top = "0";
         yesBtn.style.width = "100vw";
         yesBtn.style.height = "100vh";
-        yesBtn.style.fontSize = "80px";
+        yesBtn.style.fontSize = "90px";
         yesBtn.style.borderRadius = "0";
 
         noBtn.style.display = "none";
@@ -172,12 +186,18 @@ noBtn.addEventListener("click", () => {
 
 yesBtn.addEventListener("click", () => {
 
+    const music = document.getElementById("music");
+
+    music.volume = 0.4;
+
+    music.play().catch(() => {});
+
     document.getElementById("main").style.display = "none";
     document.getElementById("result").style.display = "block";
 
 });
 
-for(let i=0;i<40;i++){
+for(let i=0;i<50;i++){
 
     let heart = document.createElement("div");
 
@@ -188,7 +208,10 @@ for(let i=0;i<40;i++){
     heart.style.left = Math.random()*100 + "vw";
 
     heart.style.animationDuration =
-        (3 + Math.random()*5) + "s";
+        (4 + Math.random()*6) + "s";
+
+    heart.style.opacity =
+        (0.5 + Math.random()*0.5);
 
     document.body.appendChild(heart);
 
