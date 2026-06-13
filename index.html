@@ -2,110 +2,169 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<title>Bir Şey Soracağım ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Çibicik ❤️</title>
 
 <style>
-body{
+
+*{
     margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, sans-serif;
+    background:linear-gradient(135deg,#ffd6e7,#fff0f5);
     height:100vh;
+    overflow:hidden;
     display:flex;
     justify-content:center;
     align-items:center;
-    flex-direction:column;
-    font-family:Arial,sans-serif;
-    background:#ffe6ec;
     text-align:center;
 }
 
-#question{
-    font-size:40px;
+.container{
+    padding:20px;
+}
+
+h1{
+    color:#ff4081;
+    font-size:3rem;
     margin-bottom:30px;
 }
 
 button{
-    padding:15px 30px;
+    border:none;
+    border-radius:20px;
+    padding:15px 35px;
     margin:10px;
     font-size:24px;
-    border:none;
-    border-radius:15px;
     cursor:pointer;
+    transition:0.3s;
 }
 
 #yes{
-    background:#4CAF50;
+    background:#28c76f;
     color:white;
 }
 
 #no{
-    background:#f44336;
+    background:#ff4d4d;
     color:white;
 }
 
 #result{
     display:none;
+    padding:20px;
 }
 
-img{
-    max-width:350px;
-    border-radius:20px;
+#result img{
+    width:350px;
+    max-width:90%;
+    border-radius:25px;
+    box-shadow:0 0 25px rgba(0,0,0,0.2);
 }
+
+.message{
+    margin-top:20px;
+    font-size:38px;
+    color:#ff4081;
+    font-weight:bold;
+}
+
+.sub{
+    margin-top:15px;
+    font-size:26px;
+}
+
+.heart{
+    position:fixed;
+    top:-50px;
+    font-size:24px;
+    animation:fall linear infinite;
+}
+
+@keyframes fall{
+    from{
+        transform:translateY(-100px);
+    }
+    to{
+        transform:translateY(110vh);
+    }
+}
+
 </style>
 </head>
 
 <body>
 
-<div id="main">
-    <h1 id="question">Beni Affeder Misin? ❤️</h1>
+<div class="container" id="main">
 
-    <button id="yes">Evet ❤️</button>
-    <button id="no">Hayır 😔</button>
+    <h1 id="question">
+        Beni affeder misin Çibicik? ❤️
+    </h1>
+
+    <button id="yes">❤️ Evet</button>
+    <button id="no">😔 Hayır</button>
+
 </div>
 
 <div id="result">
+
     <img src="bizimfoto.jpeg" alt="Biz">
-    <h2>Seni Çok Seviyorum Çibicik ❤️</h2>
-    <p>
-        Yarın Benimle Buluşur musun?
-    </p>
+
+    <div class="message">
+        Seni çok seviyorum ❤️
+    </div>
+
+    <div class="sub">
+        Yarın seni görebilir miyim? 🥺
+    </div>
+
 </div>
 
 <script>
 
-let yesBtn = document.getElementById("yes");
-let noBtn = document.getElementById("no");
-let question = document.getElementById("question");
+const yesBtn = document.getElementById("yes");
+const noBtn = document.getElementById("no");
+const question = document.getElementById("question");
 
-let size = 1;
+let scale = 1;
 
 const messages = [
-"Emin misin? 😢",
-"Gerçekten mi? 🥺",
-"Bir daha düşün ❤️",
-"Lütfen 😭",
-"Bak çok üzüldüm 😔",
-"Son kararın mı? 💔"
+    "Emin misin? 😢",
+    "Gerçekten mi? 🥺",
+    "Bir daha düşün ❤️",
+    "Lütfen 😭",
+    "Bak çok üzüldüm 😔",
+    "Son kararın mı? 💔"
 ];
 
 let count = 0;
 
 noBtn.addEventListener("click", () => {
 
-    size += 0.5;
+    scale += 0.5;
 
-    yesBtn.style.transform = `scale(${size})`;
+    yesBtn.style.transform = `scale(${scale})`;
 
     if(count < messages.length){
-        question.innerText = messages[count];
+        question.innerHTML = messages[count];
         count++;
     }
 
-    if(size > 5){
+    if(scale > 4){
+
         yesBtn.style.position = "fixed";
-        yesBtn.style.top = "0";
         yesBtn.style.left = "0";
+        yesBtn.style.top = "0";
         yesBtn.style.width = "100vw";
         yesBtn.style.height = "100vh";
         yesBtn.style.fontSize = "80px";
+        yesBtn.style.borderRadius = "0";
+
         noBtn.style.display = "none";
     }
 
@@ -117,6 +176,23 @@ yesBtn.addEventListener("click", () => {
     document.getElementById("result").style.display = "block";
 
 });
+
+for(let i=0;i<40;i++){
+
+    let heart = document.createElement("div");
+
+    heart.className = "heart";
+
+    heart.innerHTML = "❤️";
+
+    heart.style.left = Math.random()*100 + "vw";
+
+    heart.style.animationDuration =
+        (3 + Math.random()*5) + "s";
+
+    document.body.appendChild(heart);
+
+}
 
 </script>
 
